@@ -1,0 +1,32 @@
+{
+  "name": "phq-9-demo",
+  "version": "1.0.0",
+  "description": "A React/Node based example of the PHQ-9 depression screener.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react",
+    "koa",
+    "redux",
+    "phq-9"
+  ],
+  "author": "Avindra Goolcharan",
+  "license": "MIT",
+  "dependencies": {
+    "koa": "2",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "react-redux": "^4.4.5",
+    "react-router": "^2.8.1",
+    "redux": "^3.6.0"
+  },
+  "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-core": "^6.17.0",
+    "babel-loader": "^6.2.5",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.16.2"
+  }
+}
