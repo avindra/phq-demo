@@ -10,12 +10,12 @@ export default (state = initialState, action) => {
     case 'GO_NEXT':
       return {
         ...state,
-        currentQuestion: currentQuestion + 1,
+        currentQuestion: state.currentQuestion + 1,
       }
     case 'GO_PREV':
       return {
         ...state,
-        currentQuestion: currentQuestion - 1,
+        currentQuestion: state.currentQuestion - 1,
       }
     default:
       return state;
