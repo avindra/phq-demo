@@ -1,6 +1,4 @@
 const Koa = require('koa');
-const app = new Koa();
-
 import { renderToString } from 'react-dom/server'
 
 import React from 'react'
@@ -8,13 +6,12 @@ import App from './src/containers/App'
 
 const fs = require('fs');
 
-const hash = fs.readFileSync('./build');
+let hash = fs.readFileSync('./build');
 
 // Redux related imports
 import { createStore } from 'redux'
 import reducers from './src/reducers'
 import { Provider } from 'react-redux'
-
 
 // Die if hash is not correct
 if(hash.length !== 20) {
@@ -26,57 +23,79 @@ import { ServerRouter, createServerRenderContext } from 'react-router'
 
 console.log(`Build hash ${ hash } will be used for this instance.`);
 
-/**
- * Serve static assets with Koa.
- * In an actual deployment, this would better be handled by nginx
- * or some other http server optimized for serving static assets.
- * For a simple development experience, we will just use Koa.
-*/
-app.use(require('koa-static')('www'))
+function setHash(_h) {
+  hash = _h;
+}
 
-app.use(ctx => {
-  const store = createStore(reducers);
+function makeServer(devMode = false) {
+  const app = new Koa();
+  /**
+   * Serve static assets with Koa.
+   * In an actual deployment, this would better be handled by nginx
+   * or some other http server optimized for serving static assets.
+   * For a simple development experience, we will just use Koa.
+  */
+  app.use(require('koa-static')('www'))
 
-  const context = createServerRenderContext();
-  const markup = renderToString(
-    <ServerRouter
-      location={ctx.url}
-      context={context}
-    >
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </ServerRouter>
-  )
+  app.use(ctx => {
+    const store = createStore(reducers);
 
-  const result = context.getResult();
-  if(result.redirect) {
-    // TODO: Handle redirect here
-  } else if(result.missed) {
-      // TODO: Handle 404s here
-  }
+    const context = createServerRenderContext();
+    const markup = renderToString(
+      <ServerRouter
+        location={ctx.url}
+        context={context}
+      >
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </ServerRouter>
+    )
 
-  // Get redux state
-  const initialState = store.getState();
+    const result = context.getResult();
+    if(result.redirect) {
+      // TODO: Handle redirect here
+    } else if(result.missed) {
+        // TODO: Handle 404s here
+    }
 
-  ctx.body = `<!DOCTYPE html>
-    <html>
-      <head>
-        <title>PHQ-9 Demo</title>
-        <script>
-        <!--
-        window.rdx_init = ${ JSON.stringify(initialState) }
-        --></script>
-      </head>
-      <body>
-        <div id="rct_root">${ markup }</div>
-        <script src="/assets/main.${ hash }.js"></script>
-      </body>
-    </html>`
-})
+    // Get redux state
+    const initialState = store.getState();
 
-const port = 5000;
+    // Serve dev assets only in dev
+    // Todo: use hostname instead of assuming localhost
+    const bundleURL = devMode ? `http://localhost:3000/main.${ hash }.js` : `/assets/main.${ hash }.js`;
 
-app.listen(port)
+    ctx.body = `<!DOCTYPE html>
+      <html>
+        <head>
+          <title>PHQ-9 Demo</title>
+          <script>
+          <!--
+          window.rdx_init = ${ JSON.stringify(initialState) }
+          --></script>
+        </head>
+        <body>
+          <div id="rct_root">${ markup }</div>
+          <script src="${bundleURL}"></script>
+        </body>
+      </html>`
+  })
 
-console.log(`App is listening on port ${ port }`)
+  const port = 5000;
+
+  app.listen(port)
+
+  console.log(`App is listening on port ${ port }`)
+  return app;
+}
+
+export {
+  makeServer,
+  setHash,
+}
+
+if(!module.parent) {
+  console.log('Running standalone production build.');
+  makeServer();
+}

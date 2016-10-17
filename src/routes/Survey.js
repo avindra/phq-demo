@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react'
 import Question from './../components/Question'
-import { Match } from 'react-router'
 
 import { connect } from 'react-redux'
 
@@ -16,6 +15,7 @@ const Survey = ({ prompt, dispatch }) => (
 
 Survey.propTypes = {
   dispatch : PropTypes.func.isRequired,
+  prompt : PropTypes.string.isRequired,
 };
 
 export default connect(({ questions }) => {

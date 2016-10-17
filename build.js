@@ -47,6 +47,8 @@ if(isRelease) {
   }))
 }
 
+import { makeServer, setHash } from './server'
+
 const compiler = webpack(wpconfig);
 
 function onBuild(err, stats) {
@@ -67,6 +69,7 @@ function onBuild(err, stats) {
 
   console.log('New build: ' + stats.hash);
   fs.writeFileSync('build', stats.hash);
+  setHash(stats.hash);
 }
 
 
@@ -75,7 +78,8 @@ compiler.run(onBuild);
 
 
 /**
- * Use webpack dev server in development mode.
+ * Use webpack dev server and run Koa in
+ * development mode.
  */
 if(!isRelease) {
   const devServer = new server(compiler, {
@@ -87,4 +91,5 @@ if(!isRelease) {
 
   devServer.listen(3000);
   compiler.watch({}, onBuild);
+  makeServer(true);
 }
