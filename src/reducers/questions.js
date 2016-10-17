@@ -7,6 +7,11 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch(action.type) {
+    case 'GOTO':
+      return {
+        ...state,
+        currentQuestion : action.question,
+      };
     case 'GO_NEXT':
       return {
         ...state,

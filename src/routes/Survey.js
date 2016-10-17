@@ -26,7 +26,7 @@ const Survey = ({ prompt, dispatch, currentQuestion, numQuestions, responses }) 
 
   return <SurveyWrapper>
     <div style={{backgroundColor:'white', padding: '10px'}}>
-      Over the last two weeks, how often have you been bothered by:
+      ({currentQuestion + 1} of {numQuestions}) Over the last two weeks, how often have you been bothered by:
       <Question prompt={prompt} id={currentQuestion} />
     </div>
     <div id="progress">
@@ -38,7 +38,14 @@ const Survey = ({ prompt, dispatch, currentQuestion, numQuestions, responses }) 
             let classes = 'box';
             if(typeof responses[currentBox] !== 'undefined')
               classes += ' responded';
-            boxes.unshift(<div key={ currentBox } className={classes}></div>);
+            // bad hack to preserve box ID for dispatching later
+            const boxId = currentBox;
+            boxes.unshift(<div
+
+              onClick={() => dispatch({ type : 'GOTO', question : boxId })}
+              key={ currentBox }
+              className={classes}
+            />);
           }
           return boxes;
         })()}
