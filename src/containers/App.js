@@ -15,8 +15,6 @@ const App = () => (
       <br className="clear" />
     </div>
     <div id="content">
-      <p>Welcome to the PHQ (Patient Health Questionnaire) 9, which you can use to self-evaluate your depression.</p>
-
       <Match exactly pattern="/" component={Home} />
       <Match pattern="/survey" component={Survey} />
     </div>
