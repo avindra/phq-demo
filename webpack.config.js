@@ -1,5 +1,5 @@
 module.exports = {
-  entry: './src/index',
+  entry: './src/client',
   devtool : 'eval',
   output: {
     path : __dirname + '/www/assets',

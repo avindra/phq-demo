@@ -30,6 +30,22 @@ const definitions = new webpack.DefinePlugin({
 process.env.NODE_ENV = node_env;
 
 wpconfig.plugins.push(definitions);
+if(isRelease) {
+  console.log('Webpack production build requested. This bundle will be optimized for a release.');
+
+  delete wpconfig.devtool;
+  wpconfig.debug = false;
+  wpconfig.plugins.push(new webpack.optimize.OccurenceOrderPlugin());
+
+  wpconfig.plugins.push(new webpack.optimize.UglifyJsPlugin({
+    sourceMap: false,
+    mangle: true,
+    output: {
+      comments: false,
+      screw_ie8: true,
+    },
+  }))
+}
 
 const compiler = webpack(wpconfig);
 
@@ -52,6 +68,10 @@ function onBuild(err, stats) {
   console.log('New build: ' + stats.hash);
   fs.writeFileSync('build', stats.hash);
 }
+
+
+// Compile initial (or final) bundle
+compiler.run(onBuild);
 
 
 /**

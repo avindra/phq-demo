@@ -5,10 +5,10 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prod": "node build.js prod",
+    "prod": "rm www/assets/*.js && node build.js prod",
     "dev": "node build.js dev",
     "lint": "eslint .",
-    "start": "npm run prod && node server.js"
+    "start": "npm run prod && babel-node server.js"
   },
   "keywords": [
     "react",
@@ -20,6 +20,8 @@
   "license": "MIT",
   "dependencies": {
     "koa": "2",
+    "koa-static": "^2.0.0",
+    "material-ui": "^0.16.0",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-redux": "^4.4.5",
@@ -28,6 +30,7 @@
   },
   "devDependencies": {
     "babel": "^6.5.2",
+    "babel-cli": "^6.16.0",
     "babel-core": "^6.17.0",
     "babel-eslint": "^7.0.0",
     "babel-loader": "^6.2.5",
@@ -35,6 +38,7 @@
     "babel-plugin-transform-react-remove-prop-types": "^0.2.10",
     "babel-preset-es2015": "^6.16.0",
     "babel-preset-react": "^6.16.0",
+    "babel-preset-stage-3": "^6.17.0",
     "eslint": "^3.8.0",
     "eslint-loader": "^1.5.0",
     "eslint-plugin-react": "^6.4.1",
