@@ -63,14 +63,15 @@ body {
 
 #progress .box {
     display:inline-block;
-    transition: 2s all;
+    transition: 1s all;
     width: 20px;
     height: 20px;
     background-color: #7d7d7d;
     margin-right: 10px;
+    border: 1px solid black;
     cursor: pointer;
 }
 
 #progress .box.responded {
-    background-color:green;
+    background-color:#00f700;
 }
