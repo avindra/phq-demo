@@ -4,18 +4,15 @@ This is a sample React / Redux application which serves to provide the PHQ-9 dep
 
 # Approach
 
-The approach used here should enable developers to use JavaScript (including the latest spec), on the entire stack. The application state should be accessible from both client and server code.
+The approach used here should enable the team working on this app to use JavaScript (including the latest spec), on the entire stack. The application state should be accessible from both client and server code.
 
-This demo uses two packages which are currently in alpha (`koa` and `react-router`). This is not a recommended practice for writing code that is used in production. Alpha versions are used here as an exercise of using some of the latest in front end technology.
+This demo uses two packages which are currently in alpha (`koa` and `react-router`). This is not a recommended practice for writing code to be used in production. Alpha versions are used here as an exercise of using some of the latest in front end technology.
 
 I have opted out of using the `actions/` pattern in redux, in the interest of time.
-
-`material-ui` is used as the base layout / component framework.
 
 # Features
 
  * Navigation (go back to edit a question)
- * Exit at will (server will preserve the state of your entire session)
  * Good user experience for both the developer and the end-user
 
 # Developing
@@ -45,9 +42,10 @@ There are some files used in this project which are non-standard development pra
  * `src/components` React components
 
 
-# Improvements
+# Todo
 
-This is a demo project that was made as a weekend one shot. It can be improved in a number of ways:
+These are some things that can be done to improve the quality of this project:
 
  * Add animations
- * Improve CSS build process (extract styles into a bundled stylesheet, use preprocessor, etc)
+ * Improve CSS build process (extract styles into a bundled stylesheet, minify, autoprefix, use preprocessor, etc)
+ * Add unit tests + CI

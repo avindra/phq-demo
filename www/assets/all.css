@@ -75,3 +75,20 @@ body {
 #progress .box.responded {
     background-color:#00f700;
 }
+.therapist {
+    cursor:pointer;
+    display: inline-block;
+    width: 203px;
+    background-color: blue;
+    margin: 0 20px;
+    color: white;
+    border: 2px solid black;
+    text-align: center;
+}
+.therapist .name {
+    background-color:white;
+    color: black;
+    padding: 10px 19px;
+    margin: 0;
+
+}

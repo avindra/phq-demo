@@ -18,9 +18,11 @@ const Survey = ({ prompt, dispatch, currentQuestion, numQuestions, responses }) 
   if(currentQuestion === numQuestions) {
     const score = responses.reduce((sum, next) => sum + next, 0);
     return <SurveyWrapper>
-      <div>Survey complete!</div>
-      <p>Your score is { score }. Here is your recommedation:</p>
-      <Recommendation score={ score } />
+      <div style={{backgroundColor:'white', padding: '10px'}}>
+        <div>Survey complete!</div>
+        <p>Your score is { score }. Here is your recommedation:</p>
+        <Recommendation score={ score } />
+      </div>
     </SurveyWrapper>
   }
 
@@ -65,7 +67,7 @@ const Survey = ({ prompt, dispatch, currentQuestion, numQuestions, responses }) 
 
 Survey.propTypes = {
   dispatch : PropTypes.func.isRequired,
-  prompt : PropTypes.string.isRequired,
+  prompt : PropTypes.string,
   numQuestions : PropTypes.number.isRequired,
   currentQuestion : PropTypes.number.isRequired,
   responses: PropTypes.array.isRequired,

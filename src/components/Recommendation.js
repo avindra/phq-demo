@@ -1,4 +1,6 @@
 import React, { PropTypes } from 'react'
+import Therapist from './Therapist'
+import { Link } from 'react-router'
 
 function getRec(score) {
   const rec = { treatment : false };
@@ -30,12 +32,31 @@ function getRec(score) {
   return rec;
 }
 
+/**
+ * This should come from an API call
+*/
+const doctors = [
+  { name : 'Dr. Willie P. Curran', phone: '209-758-7721' },
+  { name : 'Dr. Arthur J. Brown', phone : '701-303-1591'},
+  { name : 'Dr. Luz K. Byers', phone : '914-815-3273' },
+]
+
 const Recommendation = ({ score }) => {
   const { message, treatment } = getRec(score);
 
+  let suggestion =  'Treatment is not recommended for you.';
+  if(treatment) {
+    suggestion = <div style={{textAlign :'center'}}>
+      Here are three doctors we can recommend for you. Click to get in touch with one:
+      <div>
+        { doctors.map((d, i ) => <Link key={i} to="/thanks"><Therapist {...d} /></Link> ) }
+      </div>
+    </div>
+  }
+
   return <div>
-    { message }
-    { treatment ? 'Here are 3 options' : 'Treatment is not recommended for you.'}
+    <div style={{ marginLeft: 20, borderLeft : '2px solid orange', paddingLeft : 20 }}>{ message }</div>
+    <div>{ suggestion }</div>
   </div>
 }
 
