@@ -9,13 +9,14 @@ const options = [
   'Nearly every day',
 ];
 
-const Question = ({ prompt, id, dispatch }) => (
+const Question = ({ prompt, id, dispatch, response }) => (
   <div>
     <p style={{marginLeft: '10px', borderLeft:'4px solid orange', paddingLeft:'20px'}}>{ prompt }</p>
     <hr />
     <ul id="responses">{
       options.map((o, i) =>
         <li
+          className={typeof response === 'number' && response === i ? 'selection' : ''}
           onClick={() => {
             // double dispatch is considered an anti-pattern
             dispatch({ type : 'RESPOND', id, selection : i });
@@ -33,6 +34,7 @@ Question.propTypes = {
   prompt : PropTypes.string.isRequired,
   id : PropTypes.number.isRequired,
   dispatch : PropTypes.func.isRequired,
+  response : PropTypes.number,
 };
 
 export default connect()(Question)

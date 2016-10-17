@@ -27,7 +27,11 @@ const Survey = ({ prompt, dispatch, currentQuestion, numQuestions, responses }) 
   return <SurveyWrapper>
     <div style={{backgroundColor:'white', padding: '10px'}}>
       ({currentQuestion + 1} of {numQuestions}) Over the last two weeks, how often have you been bothered by:
-      <Question prompt={prompt} id={currentQuestion} />
+      <Question
+        prompt={prompt}
+        id={currentQuestion}
+        response={responses[currentQuestion]}
+      />
     </div>
     <div id="progress">
       <div style={{float:'left'}}>

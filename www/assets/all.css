@@ -57,7 +57,7 @@ body {
 #responses li:hover {
     background-color: #8c7319;
 }
-#responses li:active {
+#responses li:active, #responses li.selection {
     background-color: #675513;
 }
 
