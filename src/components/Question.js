@@ -9,7 +9,7 @@ const options = [
 
 const Question = ({ prompt }) => (
   <div>
-    <p>Q: { prompt }</p>
+    <p>{ prompt }</p>
     <ul>{ options.map((o, i) => <li key={i}>{ o }</li> ) }</ul>
   </div>
 )

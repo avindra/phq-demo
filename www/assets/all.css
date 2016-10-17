@@ -1,0 +1,32 @@
+body {
+    margin: 0;
+    font-family: sans-serif;
+}
+
+#rct_root {
+
+}
+
+/* header */
+#header, #header a {
+    background: #4141ff;
+    color:white;
+    padding: 5px 10px;
+}
+
+#logo {
+    font-size: larger;
+    float:left;
+}
+#links {
+    float:right;
+}
+
+.clear {
+    clear:both;
+}
+
+/* content */
+#content {
+    margin: 0 10px;
+}

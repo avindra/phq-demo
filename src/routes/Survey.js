@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 const Survey = ({ prompt, dispatch, currentQuestion, numQuestions }) => (
   <div>
     <h1>Survey!</h1>
-    <p>Over the last two weeks, how often have you been bothered by any of the following problems?</p>
+    <p>Over the last two weeks, how often have you been bothered by:</p>
     <Question prompt={prompt} />
     <button disabled={currentQuestion === 0} onClick={() => dispatch({ type : 'GO_PREV' })}>Previous Question</button>
     <button disabled={currentQuestion === numQuestions - 1} onClick={() => dispatch({ type : 'GO_NEXT' })}>Next Question</button>

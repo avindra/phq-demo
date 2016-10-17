@@ -70,6 +70,7 @@ function makeServer(devMode = false) {
       <html>
         <head>
           <title>PHQ-9 Demo</title>
+          <link rel="stylesheet" href="/assets/all.css" />
           <script>
           <!--
           window.rdx_init = ${ JSON.stringify(initialState) }

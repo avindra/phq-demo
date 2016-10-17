@@ -42,4 +42,12 @@ There are some files used in this project which are non-standard development pra
  * `build` A file containing only the hash of the latest production assets to use (if any)
  * `build.js` Core wrapper script which is used to manage webpack during production builds as well as the normal development process.  
  * `src/` All core source code
- * `src/components` React components  
+ * `src/components` React components
+
+
+# Improvements
+
+This is a demo project that was made as a weekend one shot. It can be improved in a number of ways:
+
+ * Add animations
+ * Improve CSS build process (extract styles into a bundled stylesheet, use preprocessor, etc)
