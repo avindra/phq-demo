@@ -4,20 +4,12 @@ import { renderToString } from 'react-dom/server'
 import React from 'react'
 import App from './src/containers/App'
 
-const fs = require('fs');
-
-let hash = fs.readFileSync('./build');
+let hash = null;
 
 // Redux related imports
 import { createStore } from 'redux'
 import reducers from './src/reducers'
 import { Provider } from 'react-redux'
-
-// Die if hash is not correct
-if(hash.length !== 20) {
-  console.log(`Unexpected hash (${ hash }) found. Please run "npm start".`);
-  process.exit(1);
-}
 
 import { ServerRouter, createServerRenderContext } from 'react-router'
 
@@ -98,5 +90,14 @@ export {
 
 if(!module.parent) {
   console.log('Running standalone production build.');
+
+  const fs = require('fs');
+  setHash(fs.readFileSync('./build'));
+
+  // Die if hash is not correct
+  if(hash.length !== 20) {
+    console.log(`Unexpected hash (${ hash }) found. Please run "npm start".`);
+    process.exit(1);
+  }
   makeServer();
 }

@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rm www/assets/*.js && babel-node build.js prod",
+    "build": "babel-node build.js prod",
     "dev": "babel-node build.js dev",
     "lint": "eslint .",
     "start": "npm run build && babel-node server.js"

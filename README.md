@@ -21,6 +21,8 @@ I have opted out of using the `actions/` pattern in redux, in the interest of ti
 npm run dev
 ```
 
+Then start to edit files as necessary. Edits to client side code will auto trigger a browser reload via `webpack`. Edits to server side code will currently require a manual restart of the web server.
+
 # Production run
 
 Production optimizations include:
@@ -37,10 +39,10 @@ npm start
 There are some files used in this project which are non-standard development practices. To prevent confusion, I've documented the purpose of some of these files:
 
  * `build` A file containing only the hash of the latest production assets to use (if any)
- * `build.js` Core wrapper script which is used to manage webpack during production builds as well as the normal development process.  
+ * `build.js` Core wrapper script for `webpack.config.js` which is used to manage webpack during production builds as well as the normal development process.
  * `src/` All core source code
  * `src/components` React components
-
+ * `src/data` hardcoded data assets (i.e., the question bank)
 
 # Todo
 
