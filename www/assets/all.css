@@ -60,3 +60,17 @@ body {
 #responses li:active {
     background-color: #675513;
 }
+
+#progress .box {
+    display:inline-block;
+    transition: 2s all;
+    width: 20px;
+    height: 20px;
+    background-color: #7d7d7d;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+#progress .box.responded {
+    background-color:green;
+}

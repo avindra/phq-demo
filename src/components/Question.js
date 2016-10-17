@@ -11,9 +11,21 @@ const options = [
 
 const Question = ({ prompt, id, dispatch }) => (
   <div>
-    <p style={{marginLeft: '10px'}}>{ prompt }</p>
+    <p style={{marginLeft: '10px', borderLeft:'4px solid orange', paddingLeft:'20px'}}>{ prompt }</p>
     <hr />
-    <ul id="responses">{ options.map((o, i) => <li onClick={() => dispatch({ type : 'RESPOND', id, selection : i })} key={i}>{ o }</li> ) }</ul>
+    <ul id="responses">{
+      options.map((o, i) =>
+        <li
+          onClick={() => {
+            // double dispatch is considered an anti-pattern
+            dispatch({ type : 'RESPOND', id, selection : i });
+            dispatch({ type : 'GO_NEXT' });
+          }}
+          key={i}>{
+          o
+        }</li>
+      )
+    }</ul>
   </div>
 )
 
