@@ -6,6 +6,8 @@ module.exports = {
     jsonpFunction : 'wp',
     filename: '[name].[hash].js',
     chunkFilename: 'chunk.[id].[hash].js',
+    hotUpdateMainFilename:'update-main-[hash].json',
+    hotUpdateChunkFilename:'update-chunk-[hash]-[id].js',
   },
   resolve : {
     modulesDirectories : [

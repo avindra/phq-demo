@@ -25,9 +25,14 @@ const definitions = new webpack.DefinePlugin({
   'process.env.NODE_ENV' : JSON.stringify(node_env),
 });
 
+// port to be used by webpack
+const wpport = 3000;
+
 // passthru desired environment to prevent
 // any inconsistencies / developer mistakes
 process.env.NODE_ENV = node_env;
+
+wpconfig.output.publicPath = isRelease ? '/assets/' : `http://localhost:${ wpport }/`;
 
 wpconfig.plugins.push(definitions);
 if(isRelease) {
@@ -45,6 +50,13 @@ if(isRelease) {
       screw_ie8: true,
     },
   }))
+} else { // prep hot loader
+  wpconfig.entry = [
+    `webpack-dev-server/client?http://0.0.0.0:${wpport}`,
+    `webpack/hot/dev-server`,
+    wpconfig.entry,
+  ];
+  wpconfig.plugins.push(new webpack.HotModuleReplacementPlugin());
 }
 
 import { makeServer, setHash } from './server'
@@ -89,7 +101,7 @@ if(!isRelease) {
     headers : {'Access-Control-Allow-Origin' : '*'},
   })
 
-  devServer.listen(3000);
+  devServer.listen(wpport);
   compiler.watch({}, onBuild);
   makeServer(true);
 }
